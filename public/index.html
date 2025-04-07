@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register & Pay</title>
+  <style>
+    body { font-family: sans-serif; max-width: 400px; margin: 40px auto; }
+    label, input { display: block; width: 100%; margin-bottom: 10px; }
+    button { padding: 10px 20px; background: black; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>Register for the Event</h2>
+  <form id="regForm">
+    <label>Full Name:</label>
+    <input type="text" name="name" required />
+    <label>Phone Number (+91...):</label>
+    <input type="tel" name="phone" required />
+    <button type="submit">Continue to Pay ₹50</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('regForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      localStorage.setItem("reg_name", formData.get("name"));
+      localStorage.setItem("reg_phone", formData.get("phone"));
+      window.location.href = "https://razorpay.me/@jiaapromotion";
+    });
+  </script>
+</body>
+</html>
