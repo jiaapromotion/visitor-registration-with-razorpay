@@ -35,6 +35,7 @@ app.post('/webhook', async (req, res) => {
     try {
       const payment = payload.payload.payment.entity;
       const comment = payment.notes.comment || "";
+      const amount = (payment.amount / 100).toFixed(2);
 
       let name = "Guest";
       let phone = null;
@@ -55,7 +56,7 @@ app.post('/webhook', async (req, res) => {
       await client.messages.create({
         from: 'whatsapp:' + process.env.TWILIO_WHATSAPP_NUMBER,
         to: 'whatsapp:' + phone,
-        body: `Hi ${name}, your payment of ₹50 was successful! 🎉 You're registered for the event.`
+        body: `Hi ${name}, your payment of ₹${amount} was successful! 🎉 You're registered for the event.`
       });
 
       res.status(200).send('Message sent');
